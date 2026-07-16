@@ -460,9 +460,9 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
           </svg>
         </div>
-        <h2 class="text-lg font-semibold text-gray-800 mb-1">开始使用 DeepSeek 仪表盘</h2>
-        <p class="text-sm text-gray-400 mb-5">先配置你的 DeepSeek API Key，数据自动加载</p>
-        <button onclick="openSettings()" class="btn btn-primary px-6 py-2.5">配置 API Key</button>
+        <h2 data-i18n="setup_guide_title" class="text-lg font-semibold text-gray-800 mb-1">开始使用 DeepSeek 仪表盘</h2>
+        <p data-i18n="setup_guide_desc" class="text-sm text-gray-400 mb-5">先配置你的 DeepSeek API Key，数据自动加载</p>
+        <button data-i18n="setup_guide_btn" onclick="openSettings()" class="btn btn-primary px-6 py-2.5">配置 API Key</button>
       </div>
     </div>
 
@@ -612,8 +612,8 @@
               </svg>
             </button>
           </div>
-          <p id="err-inputApiKey" class="text-xs text-red-500 mt-1.5 hidden">请填写 DeepSeek API Key</p>
-          <p class="text-xs text-gray-400 mt-1">从 <a href="https://platform.deepseek.com/api_keys" target="_blank" class="text-blue-600 font-medium hover:underline">platform.deepseek.com</a> 获取</p>
+          <p id="err-inputApiKey" data-i18n="api_key_error" class="text-xs text-red-500 mt-1.5 hidden">请填写 DeepSeek API Key</p>
+          <p data-i18n="tip_get_api_key" class="text-xs text-gray-400 mt-1">从 <a href="https://platform.deepseek.com/api_keys" target="_blank" class="text-blue-600 font-medium hover:underline">platform.deepseek.com</a> 获取</p>
         </div>
 
         <div>
@@ -630,13 +630,23 @@
             </button>
           </div>
           <details class="mt-2">
-            <summary class="text-xs text-blue-600 font-medium cursor-pointer hover:underline select-none">如何获取 usage_token？</summary>
+            <summary data-i18n="usage_token_how" class="text-xs text-blue-600 font-medium cursor-pointer hover:underline select-none">如何获取 usage_token？</summary>
             <div class="mt-2 text-xs text-gray-500 bg-gray-50 rounded-xl p-3.5 space-y-1.5 leading-relaxed border border-gray-100">
-              <p>1. 登录 <a href="https://platform.deepseek.com" target="_blank" class="text-blue-600 font-medium">platform.deepseek.com</a></p>
-              <p>2. 按 <kbd class="bg-gray-200 px-1.5 py-0.5 rounded text-[11px] font-mono">F12</kbd> 打开开发者工具</p>
-              <p>3. 切换到 Console 标签</p>
-              <p>4. 粘贴执行：<code class="bg-gray-200 px-1.5 py-0.5 rounded text-[11px] font-mono">JSON.parse(localStorage.userToken).value</code></p>
-              <p>5. 复制返回值粘贴到这里</p>
+              <p>
+                <span data-i18n="usage_token_step1">1. 登录</span>
+                <a href="https://platform.deepseek.com" target="_blank" class="text-blue-600 font-medium">platform.deepseek.com</a>
+              </p>
+              <p>
+                <span data-i18n="usage_token_step2_pre">2. 按</span>
+                <kbd class="bg-gray-200 px-1.5 py-0.5 rounded text-[11px] font-mono">F12</kbd>
+                <span data-i18n="usage_token_step2_post">打开开发者工具</span>
+              </p>
+              <p data-i18n="usage_token_step3">3. 切换到 Console 标签</p>
+              <p>
+                <span data-i18n="usage_token_step4">4. 粘贴执行：</span>
+                <code class="bg-gray-200 px-1.5 py-0.5 rounded text-[11px] font-mono">JSON.parse(localStorage.userToken).value</code>
+              </p>
+              <p data-i18n="usage_token_step5">5. 复制返回值粘贴到这里</p>
             </div>
           </details>
         </div>
@@ -685,144 +695,19 @@
     };
 
     // ═══════════════════════════════════════════════
-    //  国际化
+    //  国际化 - 翻译从 /lang/zh.json + /lang/en.json 加载
     // ═══════════════════════════════════════════════
-    const L = {
-      zh: {
-        'nav_title': 'DeepSeek',
-        'config_title': '开始使用 DeepSeek 仪表盘',
-        'config_desc': '先配置你的 DeepSeek API Key，数据自动加载',
-        'config_btn': '配置 API Key',
-        'balance': '总余额',
-        'month_cost': '本月花费',
-        'today_cost': '今日花费',
-        'cache_rate': '缓存命中率',
-        'balance_detail': '余额详情',
-        'topped_up': '充值余额',
-        'granted': '赠送余额',
-        'cost_trend': '每日花费趋势',
-        'usage_title': '用量明细（按模型）',
-        'usage_empty': '配置 usage_token 后显示模型级用量数据',
-        'usage_empty_month': '本月暂无模型用量',
-        'settings_title': '设置',
-        'api_key_label': 'DeepSeek API Key',
-        'api_key_required': '*',
-        'api_key_placeholder': 'sk-',
-        'api_key_tip': '从 platform.deepseek.com 获取',
-        'usage_token_label': 'usage_token',
-        'usage_token_optional': '（可选，用于用量明细）',
-        'usage_token_placeholder': 'usage_token',
-        'usage_token_how': '如何获取 usage_token？',
-        'usage_token_step1': '1. 登录 platform.deepseek.com',
-        'usage_token_step2': '2. 按 F12 打开开发者工具',
-        'usage_token_step3': '3. 切换到 Console 标签',
-        'usage_token_step4': '4. 粘贴执行：',
-        'usage_token_step5': '5. 复制返回值粘贴到这里',
-        'refresh_label': '自动刷新间隔',
-        'data_local': '数据存储在你的本地设备',
-        'save': '保存',
-        'today': '今日',
-        'month': '本月',
-        'model': '模型',
-        'input_token': '输入 Token',
-        'output_token': '输出 Token',
-        'cache_hit': '缓存命中',
-        'cache_miss': '缓存未命中',
-        'cost_cny': '花费 (CNY)',
-        'requests': '请求次数',
-        'total': '合计',
-        'total_cost': '花费总计',
-        'total_req': '总请求',
-        'next_refresh': '下次刷新',
-        'refreshing': '刷新中…',
-        'need_usage_token': '需配置 usage_token',
-        'no_data': '暂无数据',
-        'no_usage_month': '本月无消费',
-        'no_usage': '本月暂无用量',
-        'month_total': '本月累计',
-        'cached_token': '本月已缓存',
-        'available': '可用',
-        'low_balance': '余额偏低',
-        'insufficient': '余额不足',
-        'sufficient': '余额充足',
-        'cost_trend_hint': '需配置 usage_token',
-        'chart_placeholder': '配置 usage_token 后显示趋势图',
-        'api_key_error': '请填写 DeepSeek API Key',
-        'tip_get_api_key': '从 <a href="https://platform.deepseek.com/api_keys" target="_blank" class="text-blue-600 font-medium hover:underline">platform.deepseek.com</a> 获取',
-        'setup_guide_title': '开始使用 DeepSeek 仪表盘',
-        'setup_guide_desc': '先配置你的 DeepSeek API Key，数据自动加载',
-        'setup_guide_btn': '配置 API Key',
-        'footer_copyright': '©',
-      },
-      en: {
-        'nav_title': 'DeepSeek',
-        'config_title': 'Get Started with DeepSeek Dashboard',
-        'config_desc': 'Configure your DeepSeek API Key to get started',
-        'config_btn': 'Configure API Key',
-        'balance': 'Balance',
-        'month_cost': 'Monthly Cost',
-        'today_cost': "Today's Cost",
-        'cache_rate': 'Cache Hit Rate',
-        'balance_detail': 'Balance Details',
-        'topped_up': 'Topped Up',
-        'granted': 'Granted',
-        'cost_trend': 'Daily Cost Trend',
-        'usage_title': 'Usage Details (by Model)',
-        'usage_empty': 'Configure usage_token to view model-level data',
-        'usage_empty_month': 'No usage this month',
-        'settings_title': 'Settings',
-        'api_key_label': 'DeepSeek API Key',
-        'api_key_required': '*',
-        'api_key_placeholder': 'sk-',
-        'api_key_tip': 'Get it from platform.deepseek.com',
-        'usage_token_label': 'usage_token',
-        'usage_token_optional': ' (optional, for usage details)',
-        'usage_token_placeholder': 'usage_token',
-        'usage_token_how': 'How to get usage_token?',
-        'usage_token_step1': '1. Login platform.deepseek.com',
-        'usage_token_step2': '2. Press F12 to open DevTools',
-        'usage_token_step3': '3. Go to Console tab',
-        'usage_token_step4': '4. Paste and run: ',
-        'usage_token_step5': '5. Copy the result and paste here',
-        'refresh_label': 'Auto Refresh',
-        'data_local': 'Data stays on your device',
-        'save': 'Save',
-        'today': 'Today',
-        'month': 'Month',
-        'model': 'Model',
-        'input_token': 'Input Tokens',
-        'output_token': 'Output Tokens',
-        'cache_hit': 'Cache Hit',
-        'cache_miss': 'Cache Miss',
-        'cost_cny': 'Cost (CNY)',
-        'requests': 'Requests',
-        'total': 'Total',
-        'total_cost': 'Total Cost',
-        'total_req': 'Total Requests',
-        'next_refresh': 'Next refresh',
-        'refreshing': 'Refreshing…',
-        'need_usage_token': 'Configure usage_token',
-        'no_data': 'No data',
-        'no_usage_month': 'No usage this month',
-        'no_usage': 'No usage this month',
-        'month_total': 'Month total',
-        'cached_token': 'cached this month',
-        'available': 'Available',
-        'low_balance': 'Low Balance',
-        'insufficient': 'Insufficient',
-        'sufficient': 'Sufficient',
-        'cost_trend_hint': 'Configure usage_token',
-        'chart_placeholder': 'Configure usage_token to view chart',
-        'api_key_error': 'Please enter your DeepSeek API Key',
-        'tip_get_api_key': 'Get it from <a href="https://platform.deepseek.com/api_keys" target="_blank" class="text-blue-600 font-medium hover:underline">platform.deepseek.com</a>',
-        'setup_guide_title': 'Get Started with DeepSeek Dashboard',
-        'setup_guide_desc': 'Configure your DeepSeek API Key, data loads automatically',
-        'setup_guide_btn': 'Configure API Key',
-        'footer_copyright': '©',
-      }
-    };
+    let _L = {};
 
-    function t(key) { return (L[state.lang] || L.zh)[key] || key; }
+    function t(key) { return (_L[state.lang] || _L.zh)[key] || key; }
+
+    async function loadLang() {
+      const [zh, en] = await Promise.all([
+        fetch('/lang/zh.json').then(r => r.json()),
+        fetch('/lang/en.json').then(r => r.json())
+      ]);
+      _L = { zh, en };
+    }
 
     function setLang(lang) {
       state.lang = lang;
@@ -842,10 +727,11 @@
         }
       });
       // 更新 JS 渲染的文本
+      if (state.balance) renderBalance(state.balance);
       if (state.usage) {
         renderUsage(state.usage);
         renderModelTable(getFilteredData());
-        renderChart(state.usage); // 重绘图表，更新 dataset label
+        renderChart(state.usage);
       }
     }
 
@@ -915,6 +801,7 @@
     // ═══════════════════════════════════════════════
     document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('copyYear').textContent = new Date().getFullYear();
+      await loadLang();
       renderIntervalButtons();
       await loadConfig();
       if (state.config.has_api_key) {
@@ -1166,12 +1053,12 @@
       };
 
       if (!data || data.error || !data.daily || data.daily.length === 0) {
-        showPlaceholder(data?.needs_token ? '需配置 usage_token' : '');
+        showPlaceholder(data?.needs_token ? t('need_usage_token') : '');
         return;
       }
 
       const hasData = data.daily.some(d => d.cost > 0 || d.models.some(m => m.requests > 0));
-      if (!hasData) { showPlaceholder('本月暂无用量'); return; }
+      if (!hasData) { showPlaceholder(t('no_usage')); return; }
 
       placeholder.classList.add('hidden');
       document.getElementById('trendHint').textContent = '';
