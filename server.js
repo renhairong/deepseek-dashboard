@@ -217,7 +217,12 @@ app.get('/api/usage', async (req, res) => {
     const daily = (amountNorm.daily || []).map(d => {
       const cd = (costNorm.daily || []).find(x => x.date === d.date);
       const dailyCost = cd ? sumDailyCost(cd) : 0;
-      return { date: d.date, models: d.models, cost: dailyCost };
+      // 给每个模型补上当日花费
+      const modelsWithCost = (d.models || []).map(dm => {
+        const cm = (cd?.models || []).find(x => x.model === dm.model);
+        return { ...dm, cost: cm ? sumModelCost(cm) : 0 };
+      });
+      return { date: d.date, models: modelsWithCost, cost: dailyCost };
     });
 
     // 月度总计

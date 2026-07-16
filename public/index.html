@@ -283,6 +283,11 @@
       border-color: #2563eb !important;
     }
 
+    /* ── 语言切换 ── */
+    .lang-btn { background: none; border: none; color: #9ca3af; cursor: pointer; padding: 0.15rem 0.3rem; border-radius: 4px; font-size: 0.75rem; font-weight: 500; transition: all 0.15s ease; }
+    .lang-btn:hover { color: #6b7280; }
+    .lang-active { color: #2563eb !important; font-weight: 600; }
+
     /* ── 表格 ── */
     .data-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.8125rem; }
     .data-table thead th {
@@ -425,7 +430,7 @@
   <header class="sticky top-0 z-40 nav-blur border-b border-gray-200/80">
     <div class="max-w-6xl mx-auto px-4 md:px-5 h-12 md:h-14 flex items-center justify-between">
       <div class="flex items-center gap-2.5">
-        <span class="text-base font-bold tracking-tight text-gray-800">DeepSeek</span>
+        <span class="text-base font-bold tracking-tight text-gray-800" data-i18n="nav_title">DeepSeek</span>
         <span id="statusBadge" class="pill hidden"></span>
       </div>
       <div class="flex items-center gap-1.5">
@@ -481,7 +486,7 @@
       <div class="kpi-grid">
         <div class="kpi-card fade-in-d1">
           <div class="accent-bar accent-blue"></div>
-          <div class="kpi-label">总余额</div>
+          <div data-i18n="balance" class="kpi-label">总余额</div>
           <div class="flex items-baseline gap-1.5">
             <span id="totalBalance" class="kpi-value">--</span>
             <span class="text-xs text-gray-400 font-medium">CNY</span>
@@ -490,7 +495,7 @@
         </div>
         <div class="kpi-card fade-in-d2">
           <div class="accent-bar accent-amber"></div>
-          <div class="kpi-label">本月花费</div>
+          <div data-i18n="month_cost" class="kpi-label">本月花费</div>
           <div class="flex items-baseline gap-1.5">
             <span id="monthlyCost" class="kpi-value">--</span>
             <span class="text-xs text-gray-400 font-medium">CNY</span>
@@ -499,7 +504,7 @@
         </div>
         <div class="kpi-card fade-in-d3">
           <div class="accent-bar accent-purple"></div>
-          <div class="kpi-label">今日花费</div>
+          <div data-i18n="today_cost" class="kpi-label">今日花费</div>
           <div class="flex items-baseline gap-1.5">
             <span id="todayCost" class="kpi-value">--</span>
             <span class="text-xs text-gray-400 font-medium">CNY</span>
@@ -508,7 +513,7 @@
         </div>
         <div class="kpi-card fade-in-d4">
           <div class="accent-bar accent-emerald"></div>
-          <div class="kpi-label">缓存命中率</div>
+          <div data-i18n="cache_rate" class="kpi-label">缓存命中率</div>
           <div class="flex items-baseline gap-1.5">
             <span id="cacheRate" class="kpi-value">--</span>
             <span class="text-xs text-gray-400 font-medium">%</span>
@@ -519,18 +524,18 @@
 
       <!-- ▸ 余额详情 ▸ -->
       <div class="card fade-in">
-        <div class="card-header"><span class="card-title">余额详情</span></div>
+        <div class="card-header"><span data-i18n="balance_detail" class="card-title">余额详情</span></div>
         <div class="space-y-4">
           <div>
             <div class="flex justify-between text-sm mb-1.5">
-              <span class="text-gray-500">充值余额</span>
+              <span data-i18n="topped_up" class="text-gray-500">充值余额</span>
               <span id="toppedUpBalance" class="font-semibold text-gray-700 tabular-nums">--</span>
             </div>
             <div class="progress-bar"><div id="toppedUpBar" class="progress-fill progress-gradient-blue" style="width:0%"></div></div>
           </div>
           <div>
             <div class="flex justify-between text-sm mb-1.5">
-              <span class="text-gray-500">赠送余额</span>
+              <span data-i18n="granted" class="text-gray-500">赠送余额</span>
               <span id="grantedBalance" class="font-semibold text-gray-700 tabular-nums">--</span>
             </div>
             <div class="progress-bar"><div id="grantedBar" class="progress-fill progress-gradient-green" style="width:0%"></div></div>
@@ -541,15 +546,15 @@
       <!-- ▸ 每日花费趋势 ▸ -->
       <div class="card fade-in">
         <div class="card-header">
-          <span class="card-title">每日花费趋势</span>
-          <span id="trendHint" class="text-xs text-gray-400">需配置 usage_token</span>
+          <span data-i18n="cost_trend" class="card-title">每日花费趋势</span>
+          <span id="trendHint" data-i18n="cost_trend_hint" class="text-xs text-gray-400">需配置 usage_token</span>
         </div>
         <div class="chart-wrap">
           <canvas id="costChart"></canvas>
           <div id="chartPlaceholder" class="absolute inset-0 flex items-center justify-center pointer-events-none">
             <div class="text-center">
               <div class="text-3xl mb-2 opacity-50">📊</div>
-              <p class="text-sm text-gray-400">配置 usage_token 后显示趋势图</p>
+              <p data-i18n="chart_placeholder" class="text-sm text-gray-400">配置 usage_token 后显示趋势图</p>
             </div>
           </div>
         </div>
@@ -558,10 +563,10 @@
       <!-- ▸ 用量明细 ▸ -->
       <div class="card fade-in">
         <div class="card-header">
-          <span class="card-title">用量明细（按模型）</span>
+          <span class="card-title" data-i18n="usage_title">用量明细（按模型）</span>
           <div class="flex items-center gap-1.5">
-            <button onclick="setTimeRange('today')" class="time-pill-sm" id="time-today">今日</button>
-            <button onclick="setTimeRange('month')" class="time-pill-sm time-active" id="time-month">本月</button>
+            <button onclick="setTimeRange('today')" class="time-pill-sm" id="time-today" data-i18n="today">今日</button>
+            <button onclick="setTimeRange('month')" class="time-pill-sm time-active" id="time-month" data-i18n="month">本月</button>
           </div>
         </div>
         <div id="modelTableContainer" class="overflow-x-auto">
@@ -574,6 +579,15 @@
     </div>
   </main>
 
+  <footer class="flex items-center justify-between max-w-6xl mx-auto px-4 md:px-5 py-4">
+    <span class="text-xs text-gray-400">© <span id="copyYear"></span> mrleocc</span>
+    <div class="flex items-center gap-1 text-xs">
+      <button onclick="setLang('zh')" id="lang-zh" class="lang-btn lang-active">中文</button>
+      <span class="text-gray-300">|</span>
+      <button onclick="setLang('en')" id="lang-en" class="lang-btn">EN</button>
+    </div>
+  </footer>
+
   <!-- ═══ 设置弹窗 ═══ -->
   <div id="settingsModal" class="modal-overlay hidden">
     <div class="modal-box">
@@ -582,15 +596,15 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
-      <h2 class="text-lg font-bold text-gray-800 mb-6">设置</h2>
+      <h2 class="text-lg font-bold text-gray-800 mb-6" data-i18n="settings_title">设置</h2>
 
       <div class="space-y-5">
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-1.5">
-            DeepSeek API Key <span class="text-red-500 font-bold">*</span>
+            <span data-i18n="api_key_label">DeepSeek API Key</span> <span class="text-red-500 font-bold" data-i18n="api_key_required">*</span>
           </label>
           <div class="relative">
-            <input id="inputApiKey" type="password" class="input pr-10" placeholder="sk-">
+            <input id="inputApiKey" type="password" class="input pr-10" data-i18n="api_key_placeholder" placeholder="sk-">
             <button type="button" onclick="togglePwd('inputApiKey')" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1">
               <svg id="eye-inputApiKey" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -604,10 +618,10 @@
 
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-1.5">
-            usage_token <span class="text-gray-400 font-normal">（可选，用于用量明细）</span>
+            <span data-i18n="usage_token_label">usage_token</span><span data-i18n="usage_token_optional" class="text-gray-400 font-normal">（可选，用于用量明细）</span>
           </label>
           <div class="relative">
-            <input id="inputUsageToken" type="password" class="input pr-10" placeholder="usage_token">
+            <input id="inputUsageToken" type="password" class="input pr-10" data-i18n="usage_token_placeholder" placeholder="usage_token">
             <button type="button" onclick="togglePwd('inputUsageToken')" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1">
               <svg id="eye-inputUsageToken" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -628,13 +642,13 @@
         </div>
 
         <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-1.5">自动刷新间隔</label>
+          <label class="block text-sm font-semibold text-gray-700 mb-1.5" data-i18n="refresh_label">自动刷新间隔</label>
           <div class="interval-group" id="intervalGroup"></div>
         </div>
 
         <div class="flex items-center justify-between pt-5 border-t border-gray-100">
-          <span class="text-xs text-gray-400">数据存储在你的本地设备</span>
-          <button onclick="saveSettings()" class="btn btn-primary px-6 py-2.5 text-sm font-semibold">保存</button>
+          <span data-i18n="data_local" class="text-xs text-gray-400">数据存储在你的本地设备</span>
+          <button onclick="saveSettings()" class="btn btn-primary px-6 py-2.5 text-sm font-semibold" data-i18n="save">保存</button>
         </div>
       </div>
     </div>
@@ -666,8 +680,174 @@
       countdownTimer: null,
       countdown: 0,
       costChart: null,
-      timeRange: 'month'
+      timeRange: 'month',
+      lang: 'zh'
     };
+
+    // ═══════════════════════════════════════════════
+    //  国际化
+    // ═══════════════════════════════════════════════
+    const L = {
+      zh: {
+        'nav_title': 'DeepSeek',
+        'config_title': '开始使用 DeepSeek 仪表盘',
+        'config_desc': '先配置你的 DeepSeek API Key，数据自动加载',
+        'config_btn': '配置 API Key',
+        'balance': '总余额',
+        'month_cost': '本月花费',
+        'today_cost': '今日花费',
+        'cache_rate': '缓存命中率',
+        'balance_detail': '余额详情',
+        'topped_up': '充值余额',
+        'granted': '赠送余额',
+        'cost_trend': '每日花费趋势',
+        'usage_title': '用量明细（按模型）',
+        'usage_empty': '配置 usage_token 后显示模型级用量数据',
+        'usage_empty_month': '本月暂无模型用量',
+        'settings_title': '设置',
+        'api_key_label': 'DeepSeek API Key',
+        'api_key_required': '*',
+        'api_key_placeholder': 'sk-',
+        'api_key_tip': '从 platform.deepseek.com 获取',
+        'usage_token_label': 'usage_token',
+        'usage_token_optional': '（可选，用于用量明细）',
+        'usage_token_placeholder': 'usage_token',
+        'usage_token_how': '如何获取 usage_token？',
+        'usage_token_step1': '1. 登录 platform.deepseek.com',
+        'usage_token_step2': '2. 按 F12 打开开发者工具',
+        'usage_token_step3': '3. 切换到 Console 标签',
+        'usage_token_step4': '4. 粘贴执行：',
+        'usage_token_step5': '5. 复制返回值粘贴到这里',
+        'refresh_label': '自动刷新间隔',
+        'data_local': '数据存储在你的本地设备',
+        'save': '保存',
+        'today': '今日',
+        'month': '本月',
+        'model': '模型',
+        'input_token': '输入 Token',
+        'output_token': '输出 Token',
+        'cache_hit': '缓存命中',
+        'cache_miss': '缓存未命中',
+        'cost_cny': '花费 (CNY)',
+        'requests': '请求次数',
+        'total': '合计',
+        'total_cost': '花费总计',
+        'total_req': '总请求',
+        'next_refresh': '下次刷新',
+        'refreshing': '刷新中…',
+        'need_usage_token': '需配置 usage_token',
+        'no_data': '暂无数据',
+        'no_usage_month': '本月无消费',
+        'no_usage': '本月暂无用量',
+        'month_total': '本月累计',
+        'cached_token': '本月已缓存',
+        'available': '可用',
+        'low_balance': '余额偏低',
+        'insufficient': '余额不足',
+        'sufficient': '余额充足',
+        'cost_trend_hint': '需配置 usage_token',
+        'chart_placeholder': '配置 usage_token 后显示趋势图',
+        'api_key_error': '请填写 DeepSeek API Key',
+        'tip_get_api_key': '从 <a href="https://platform.deepseek.com/api_keys" target="_blank" class="text-blue-600 font-medium hover:underline">platform.deepseek.com</a> 获取',
+        'setup_guide_title': '开始使用 DeepSeek 仪表盘',
+        'setup_guide_desc': '先配置你的 DeepSeek API Key，数据自动加载',
+        'setup_guide_btn': '配置 API Key',
+        'footer_copyright': '©',
+      },
+      en: {
+        'nav_title': 'DeepSeek',
+        'config_title': 'Get Started with DeepSeek Dashboard',
+        'config_desc': 'Configure your DeepSeek API Key to get started',
+        'config_btn': 'Configure API Key',
+        'balance': 'Balance',
+        'month_cost': 'Monthly Cost',
+        'today_cost': "Today's Cost",
+        'cache_rate': 'Cache Hit Rate',
+        'balance_detail': 'Balance Details',
+        'topped_up': 'Topped Up',
+        'granted': 'Granted',
+        'cost_trend': 'Daily Cost Trend',
+        'usage_title': 'Usage Details (by Model)',
+        'usage_empty': 'Configure usage_token to view model-level data',
+        'usage_empty_month': 'No usage this month',
+        'settings_title': 'Settings',
+        'api_key_label': 'DeepSeek API Key',
+        'api_key_required': '*',
+        'api_key_placeholder': 'sk-',
+        'api_key_tip': 'Get it from platform.deepseek.com',
+        'usage_token_label': 'usage_token',
+        'usage_token_optional': ' (optional, for usage details)',
+        'usage_token_placeholder': 'usage_token',
+        'usage_token_how': 'How to get usage_token?',
+        'usage_token_step1': '1. Login platform.deepseek.com',
+        'usage_token_step2': '2. Press F12 to open DevTools',
+        'usage_token_step3': '3. Go to Console tab',
+        'usage_token_step4': '4. Paste and run: ',
+        'usage_token_step5': '5. Copy the result and paste here',
+        'refresh_label': 'Auto Refresh',
+        'data_local': 'Data stays on your device',
+        'save': 'Save',
+        'today': 'Today',
+        'month': 'Month',
+        'model': 'Model',
+        'input_token': 'Input Tokens',
+        'output_token': 'Output Tokens',
+        'cache_hit': 'Cache Hit',
+        'cache_miss': 'Cache Miss',
+        'cost_cny': 'Cost (CNY)',
+        'requests': 'Requests',
+        'total': 'Total',
+        'total_cost': 'Total Cost',
+        'total_req': 'Total Requests',
+        'next_refresh': 'Next refresh',
+        'refreshing': 'Refreshing…',
+        'need_usage_token': 'Configure usage_token',
+        'no_data': 'No data',
+        'no_usage_month': 'No usage this month',
+        'no_usage': 'No usage this month',
+        'month_total': 'Month total',
+        'cached_token': 'cached this month',
+        'available': 'Available',
+        'low_balance': 'Low Balance',
+        'insufficient': 'Insufficient',
+        'sufficient': 'Sufficient',
+        'cost_trend_hint': 'Configure usage_token',
+        'chart_placeholder': 'Configure usage_token to view chart',
+        'api_key_error': 'Please enter your DeepSeek API Key',
+        'tip_get_api_key': 'Get it from <a href="https://platform.deepseek.com/api_keys" target="_blank" class="text-blue-600 font-medium hover:underline">platform.deepseek.com</a>',
+        'setup_guide_title': 'Get Started with DeepSeek Dashboard',
+        'setup_guide_desc': 'Configure your DeepSeek API Key, data loads automatically',
+        'setup_guide_btn': 'Configure API Key',
+        'footer_copyright': '©',
+      }
+    };
+
+    function t(key) { return (L[state.lang] || L.zh)[key] || key; }
+
+    function setLang(lang) {
+      state.lang = lang;
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('lang-active'));
+      document.getElementById('lang-' + lang).classList.add('lang-active');
+      applyI18n();
+      if (state.usage) reRenderUsage();
+    }
+
+    function applyI18n() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = t(key);
+        } else {
+          el.innerHTML = t(key);
+        }
+      });
+      // 更新 JS 渲染的文本
+      if (state.usage) {
+        renderUsage(state.usage);
+        renderModelTable(getFilteredData());
+        renderChart(state.usage); // 重绘图表，更新 dataset label
+      }
+    }
 
     // ═══════════════════════════════════════════════
     //  启动动画 - 隐藏动画
@@ -734,6 +914,7 @@
     //  初始化
     // ═══════════════════════════════════════════════
     document.addEventListener('DOMContentLoaded', async () => {
+      document.getElementById('copyYear').textContent = new Date().getFullYear();
       renderIntervalButtons();
       await loadConfig();
       if (state.config.has_api_key) {
@@ -919,8 +1100,8 @@
 
       animateValue('totalBalance', total);
       document.getElementById('balanceStatus').innerHTML = available
-        ? `<span class="text-emerald-600 font-medium">● 可用</span>`
-        : `<span class="text-red-500 font-medium">● 余额不足</span>`;
+        ? `<span class="text-emerald-600 font-medium">● ${t('available')}</span>`
+        : `<span class="text-red-500 font-medium">● ${t('insufficient')}</span>`;
 
       document.getElementById('toppedUpBalance').textContent = `¥ ${toppedUp.toFixed(2)}`;
       document.getElementById('grantedBalance').textContent = `¥ ${granted.toFixed(2)}`;
@@ -934,11 +1115,11 @@
       badge.classList.remove('hidden', 'pill-ok', 'pill-warn', 'pill-danger');
       let pillClass, dotClass, text;
       if (total <= 0) {
-        pillClass = 'pill-danger'; dotClass = 'dot-danger'; text = '余额不足';
+        pillClass = 'pill-danger'; dotClass = 'dot-danger'; text = t('insufficient');
       } else if (total <= 5) {
-        pillClass = 'pill-warn'; dotClass = 'dot-warn'; text = '余额偏低';
+        pillClass = 'pill-warn'; dotClass = 'dot-warn'; text = t('low_balance');
       } else {
-        pillClass = 'pill-ok'; dotClass = 'dot-ok'; text = '余额充足';
+        pillClass = 'pill-ok'; dotClass = 'dot-ok'; text = t('sufficient');
       }
       badge.classList.add(pillClass);
       badge.innerHTML = `<span class="status-dot ${dotClass}"></span>${text}`;
@@ -957,21 +1138,21 @@
         document.getElementById('todayCost').textContent = '--';
         document.getElementById('todayCalls').textContent = '--';
         document.getElementById('cacheRate').textContent = '--';
-        document.getElementById('cacheInfo').textContent = data?.needs_token ? '需配置 usage_token' : '暂无数据';
+        document.getElementById('cacheInfo').textContent = data?.needs_token ? t('need_usage_token') : t('no_data');
         return;
       }
 
       const s = data.summary || {};
       document.getElementById('monthlyCost').textContent = formatYuan(s.month_cost);
       document.getElementById('todayCost').textContent = formatYuan(s.today_cost);
-      document.getElementById('todayCalls').textContent = `${s.today_requests || 0} 次调用`;
+      document.getElementById('todayCalls').textContent = `${s.today_requests || 0} ${t('requests')}`;
 
       const rate = s.cache_hit_rate || 0;
       document.getElementById('cacheRate').textContent = (rate * 100).toFixed(1);
       document.getElementById('cacheInfo').textContent = rate > 0
-        ? `本月已缓存 ${formatTokens(s.month_total?.cache_hit_tokens || 0)} token`
-        : '暂无数据';
-      document.getElementById('costTrend').textContent = s.month_cost > 0 ? '本月累计' : '本月无消费';
+        ? `${t('cached_token')} ${formatTokens(s.month_total?.cache_hit_tokens || 0)} token`
+        : t('no_data');
+      document.getElementById('costTrend').textContent = s.month_cost > 0 ? t('month_total') : t('no_usage_month');
     }
 
     function renderChart(data) {
@@ -1010,7 +1191,7 @@
         data: {
           labels,
           datasets: [{
-            label: '花费 (CNY)',
+            label: t('cost_cny'),
             data: values,
             borderColor: '#2563eb',
             backgroundColor: gradient,
@@ -1049,13 +1230,13 @@
     function renderModelTable(data) {
       const container = document.getElementById('modelTableContainer');
       if (!data || data.error || !data.models || data.models.length === 0) {
-        container.innerHTML = `<div class="text-center py-8 text-gray-400 text-sm">${data?.needs_token ? '配置 usage_token 后显示模型级用量数据' : '暂无模型用量数据'}</div>`;
+        container.innerHTML = `<div class="text-center py-8 text-gray-400 text-sm">${data?.needs_token ? t('usage_empty') : t('no_data')}</div>`;
         return;
       }
 
       const models = data.models.filter(m => m.requests > 0 || m.input_tokens > 0 || m.output_tokens > 0);
       if (models.length === 0) {
-        container.innerHTML = `<div class="text-center py-8 text-gray-400 text-sm">本月暂无模型用量</div>`;
+        container.innerHTML = `<div class="text-center py-8 text-gray-400 text-sm">${t('usage_empty_month')}</div>`;
         return;
       }
 
@@ -1064,7 +1245,7 @@
       // ── 桌面端表格 ──
       let tableHtml = `<div class="desktop-only"><table class="data-table">
         <thead><tr>
-          <th>模型</th><th>输入 Token</th><th>输出 Token</th><th>缓存命中</th><th>缓存未命中</th><th>花费 (CNY)</th><th>请求次数</th>
+          <th>${t('model')}</th><th>${t('input_token')}</th><th>${t('output_token')}</th><th>${t('cache_hit')}</th><th>${t('cache_miss')}</th><th>${t('cost_cny')}</th><th>${t('requests')}</th>
         </tr></thead><tbody>`;
 
       // ── 移动端卡片 ──
@@ -1091,27 +1272,27 @@
           <div class="model-card-name">${m.model}</div>
           <div class="model-card-grid">
             <div class="model-card-item">
-              <span class="label">输入 Token</span>
+              <span class="label">${t('input_token')}</span>
               <span class="value">${formatTokens(realInp)}</span>
             </div>
             <div class="model-card-item">
-              <span class="label">输出 Token</span>
+              <span class="label">${t('output_token')}</span>
               <span class="value">${formatTokens(out)}</span>
             </div>
             <div class="model-card-item">
-              <span class="label">缓存命中</span>
+              <span class="label">${t('cache_hit')}</span>
               <span class="value highlight-green">${formatTokens(hit)}</span>
             </div>
             <div class="model-card-item">
-              <span class="label">缓存未命中</span>
+              <span class="label">${t('cache_miss')}</span>
               <span class="value">${formatTokens(miss)}</span>
             </div>
             <div class="model-card-item">
-              <span class="label">花费</span>
+              <span class="label">${t('cost_cny')}</span>
               <span class="value highlight-cost">¥${formatYuan(cst)}</span>
             </div>
             <div class="model-card-item">
-              <span class="label">请求次数</span>
+              <span class="label">${t('requests')}</span>
               <span class="value">${rq.toLocaleString()}</span>
             </div>
           </div>
@@ -1119,7 +1300,7 @@
       });
 
       tableHtml += `</tbody><tfoot><tr>
-        <td>合计</td>
+        <td>${t('total')}</td>
         <td class="tabular-nums">${formatTokens(ti)}</td>
         <td class="tabular-nums">${formatTokens(to)}</td>
         <td class="tabular-nums text-emerald-600">${formatTokens(tc)}</td>
@@ -1130,30 +1311,30 @@
 
       // 移动端合计
       cardHtml += `<hr class="model-divider">
-        <div class="model-card-total-title">合计</div>
+        <div class="model-card-total-title">${t('total')}</div>
         <div class="model-card-grid">
           <div class="model-card-item">
-            <span class="label">输入 Token</span>
+            <span class="label">${t('input_token')}</span>
             <span class="value">${formatTokens(ti)}</span>
           </div>
           <div class="model-card-item">
-            <span class="label">输出 Token</span>
+            <span class="label">${t('output_token')}</span>
             <span class="value">${formatTokens(to)}</span>
           </div>
           <div class="model-card-item">
-            <span class="label">缓存命中</span>
+            <span class="label">${t('cache_hit')}</span>
             <span class="value highlight-green">${formatTokens(tc)}</span>
           </div>
           <div class="model-card-item">
-            <span class="label">缓存未命中</span>
+            <span class="label">${t('cache_miss')}</span>
             <span class="value">${formatTokens(tm)}</span>
           </div>
           <div class="model-card-item">
-            <span class="label">花费总计</span>
+            <span class="label">${t('total_cost')}</span>
             <span class="value highlight-cost">¥${formatYuan(tcst)}</span>
           </div>
           <div class="model-card-item">
-            <span class="label">总请求</span>
+            <span class="label">${t('total_req')}</span>
             <span class="value">${trq.toLocaleString()}</span>
           </div>
         </div></div>`;
@@ -1219,7 +1400,7 @@
 
     function updateCountdownDisplay() {
       const el = document.getElementById('refreshTimer');
-      el.textContent = state.countdown > 0 ? `下次刷新 ${state.countdown}s` : '刷新中…';
+      el.textContent = state.countdown > 0 ? `${t('next_refresh')} ${state.countdown}s` : t('refreshing');
     }
 
     // 点击 overlay 关闭
