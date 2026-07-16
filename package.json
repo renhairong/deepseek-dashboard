@@ -1,0 +1,12 @@
+{
+  "name": "deepseek-dashboard",
+  "version": "1.0.0",
+  "description": "DeepSeek API 用量仪表盘",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
