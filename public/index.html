@@ -1123,7 +1123,7 @@
 
       const models = data.models.filter(m => m.requests > 0 || m.input_tokens > 0 || m.output_tokens > 0);
       if (models.length === 0) {
-        container.innerHTML = `<div class="text-center py-8 text-gray-400 text-sm">${t('usage_empty_month')}</div>`;
+        container.innerHTML = `<div class="text-center py-8 text-gray-400 text-sm">${t(state.timeRange === 'today' ? 'usage_empty_today' : 'usage_empty_month')}</div>`;
         return;
       }
 

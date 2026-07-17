@@ -14,6 +14,7 @@
   "usage_title": "Usage Details (by Model)",
   "usage_empty": "Configure usage_token to view model-level data",
   "usage_empty_month": "No usage this month",
+  "usage_empty_today": "No usage today",
   "settings_title": "Settings",
   "api_key_label": "DeepSeek API Key",
   "api_key_required": "*",
